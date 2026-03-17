@@ -1,0 +1,11 @@
+CREATE TABLE UserAISettings (
+    SettingId INT PRIMARY KEY IDENTITY(1,1),
+    UserId INT NOT NULL,
+    ApiKey NVARCHAR(500) NOT NULL,
+    CreatedAt DATETIME2 NOT NULL DEFAULT GETUTCDATE(),
+    UpdatedAt DATETIME2 NOT NULL DEFAULT GETUTCDATE(),
+    CONSTRAINT FK_UserAISettings_Users FOREIGN KEY (UserId) REFERENCES Users(UserId),
+    CONSTRAINT UQ_UserAISettings_UserId UNIQUE (UserId)
+);
+
+CREATE INDEX IX_UserAISettings_UserId ON UserAISettings(UserId);

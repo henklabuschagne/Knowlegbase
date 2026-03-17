@@ -1,0 +1,13 @@
+CREATE TABLE Teams (
+    TeamId INT PRIMARY KEY IDENTITY(1,1),
+    TeamName NVARCHAR(200) NOT NULL UNIQUE,
+    Description NVARCHAR(500) NULL,
+    IsActive BIT NOT NULL DEFAULT 1,
+    CreatedBy INT NOT NULL,
+    CreatedAt DATETIME2 NOT NULL DEFAULT GETUTCDATE(),
+    UpdatedAt DATETIME2 NOT NULL DEFAULT GETUTCDATE(),
+    CONSTRAINT FK_Teams_CreatedBy FOREIGN KEY (CreatedBy) REFERENCES Users(UserId)
+);
+
+CREATE INDEX IX_Teams_IsActive ON Teams(IsActive);
+CREATE INDEX IX_Teams_CreatedBy ON Teams(CreatedBy);
